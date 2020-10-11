@@ -11,9 +11,7 @@
 | first_name          | string  | null: false |
 | family_name_reading | string  | null: false |
 | first_name_reading  | string  | null: false |
-| birth_year          | integer | null: false |
-| birth_month         | integer | null: false |
-| birth_day           | integer | null: false |
+| birthday            | date    | null: false |
 
 ### Association
 
@@ -43,16 +41,27 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| postal_code   | integer    | null: false                    |
-| prefecture    | integer    | null: false                    |
-| city          | string     | null: false                    |
-| house_number  | string     | null: false                    |
-| building_name | string     |                                |
-| phone_number  | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
+- has_one    :shipping_address
+
+## shipping_addresses テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | integer    | null: false                    |
+| prefecture    | integer    | null: false                    |
+| city          | string     | null: false                    |
+| house_number  | string     | null: false                    |
+| building_name | string     |                                |
+| phone_number  | integer    | null: false                    |
+| purchase      | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :purchase
