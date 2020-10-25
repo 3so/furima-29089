@@ -6,8 +6,8 @@ function calcSalesCommission() {
   const salesCommission = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
   salesCommission.innerHTML = `${calcSalesCommission}`;
-  profit.innerHTML = `${calcProfit}`
+  profit.innerHTML = `${calcProfit}`;
   });
 }
 
-window.addEventListener("load", calcSalesCommission)
+window.addEventListener('load', calcSalesCommission)
