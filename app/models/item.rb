@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :lead_time
   
   with_options presence: true do
+    validates :image
     validates :name
     validates :description
     validates :category_id
@@ -17,15 +18,17 @@ class Item < ApplicationRecord
     validates :shipping_charges_payer_id
     validates :shipping_location_id
     validates :lead_time_id
-    validates :price, :numericality => { :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999}
-    validates :image
   end
-
-  with_options numericality: { other_than: 1 } do
+  
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
+  
+  with_options numericality: { other_than: 1, message: "select" } do
     validates :category_id
     validates :condition_id
     validates :shipping_charges_payer_id
     validates :shipping_location_id
     validates :lead_time_id
   end
+
+
 end
