@@ -13,15 +13,14 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :description
+    validates :price, format: { with:/\d/, message:"half-width number" }, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
     validates :category_id
     validates :condition_id
     validates :shipping_charges_payer_id
     validates :shipping_location_id
     validates :lead_time_id
   end
-  
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
-  
+    
   with_options numericality: { other_than: 1, message: "select" } do
     validates :category_id
     validates :condition_id
@@ -29,6 +28,5 @@ class Item < ApplicationRecord
     validates :shipping_location_id
     validates :lead_time_id
   end
-
 
 end
