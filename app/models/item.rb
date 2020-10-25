@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+
+  belongs_to :user
+
   with_options presence: true do
     validates :name
     validates :description
@@ -8,6 +11,6 @@ class Item < ApplicationRecord
     validates :shipping_location_id
     validates :lead_time_id
     validates :price
-    validates :user_id, foreign_key: true
+    validates :user_id
   end
 end
