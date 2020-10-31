@@ -56,7 +56,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '価格が300円未満ではないこと' do
-        @item.price = 1
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price out of setting range")
       end
