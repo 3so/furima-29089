@@ -58,17 +58,17 @@ describe Item do
       it '価格が300円未満ではないこと' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price out of setting range")
+        expect(@item.errors.full_messages).to include('Price out of setting range')
       end
       it '価格が9,999,999円以上ではないこと' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price out of setting range")
+        expect(@item.errors.full_messages).to include('Price out of setting range')
       end
       it '価格は半角数字で入力されていること' do
-        @item.price = "hoge"
+        @item.price = 'hoge'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price half-width number")
+        expect(@item.errors.full_messages).to include('Price half-width number')
       end
     end
 
@@ -76,27 +76,27 @@ describe Item do
       it 'category_id = 1 ではないこと' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category select")
+        expect(@item.errors.full_messages).to include('Category select')
       end
       it 'condition_id = 1 ではないこと' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition select")
+        expect(@item.errors.full_messages).to include('Condition select')
       end
       it 'shipping_charges_payer_id = 1 ではないこと' do
         @item.shipping_charges_payer_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping charges payer select")
+        expect(@item.errors.full_messages).to include('Shipping charges payer select')
       end
       it 'shipping_location_id = 1 ではないこと' do
         @item.shipping_location_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping location select")
+        expect(@item.errors.full_messages).to include('Shipping location select')
       end
       it 'lead_time_id = 1 ではないこと' do
         @item.lead_time_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Lead time select")
+        expect(@item.errors.full_messages).to include('Lead time select')
       end
     end
 
@@ -104,12 +104,11 @@ describe Item do
       it 'エラーハンドリングができていること' do
         @item.image = nil
         @item.valid?
-        expect{
+        expect do
           @item.save
-        }.not_to change{ Item.count }
+        end.not_to change { Item.count }
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
-    end 
+    end
   end
 end
-

@@ -25,12 +25,12 @@ describe User do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'メールアドレスは@を含む必要があること' do
-        @user.email = "test"
+        @user.email = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'パスワードが必須であること' do
         @user.password = nil
@@ -39,34 +39,34 @@ describe User do
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it 'パスワードは6文字以上であること' do
-        @user.password = "aaaa5"
+        @user.password = 'aaaa5'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'パスワードは半角英字のみでは登録できないこと' do
-        @user.password = "aaaaaa"
+        @user.password = 'aaaaaa'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
       it 'パスワードは半角数字のみでは登録できないこと' do
-        @user.password = "111111"
+        @user.password = '111111'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+        expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
       it 'パスワードは確認用を含めて2回入力すること' do
-        @user.password_confirmation = ""
+        @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it '新規登録・ログイン共にエラーハンドリングができていること（適切では無い値が入力された場合、情報は受け入れられず、エラーメッセージを出力させる）' do
         @user.nickname = nil
         @user.valid?
-        expect{
+        expect do
           @user.save
-        }.not_to change{ User.count }
+        end.not_to change { User.count }
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
     end
@@ -86,14 +86,14 @@ describe User do
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
       it 'ユーザー本名の名字は全角（漢字・ひらがな・カタカナ）で入力させること' do
-        @user.family_name = "a"
+        @user.family_name = 'a'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name Full-width characters")
+        expect(@user.errors.full_messages).to include('Family name Full-width characters')
       end
       it 'ユーザー本名の名前は全角（漢字・ひらがな・カタカナ）で入力させること' do
-        @user.first_name = "a"
+        @user.first_name = 'a'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name Full-width characters")
+        expect(@user.errors.full_messages).to include('First name Full-width characters')
       end
       it 'ユーザー本名のフリガナが、名字が必須であること' do
         @user.family_name_reading = nil
@@ -106,14 +106,14 @@ describe User do
         expect(@user.errors.full_messages).to include("First name reading can't be blank")
       end
       it 'ユーザー本名の名字のフリガナは全角（漢字・ひらがな・カタカナ）で入力させること' do
-        @user.family_name_reading = "a"
+        @user.family_name_reading = 'a'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name reading Full-width katakana characters")
+        expect(@user.errors.full_messages).to include('Family name reading Full-width katakana characters')
       end
       it 'ユーザー本名の名前のフリガナは全角（漢字・ひらがな・カタカナ）で入力させること' do
-        @user.first_name_reading = "a"
+        @user.first_name_reading = 'a'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name reading Full-width katakana characters")
+        expect(@user.errors.full_messages).to include('First name reading Full-width katakana characters')
       end
       it '生年月日が必須であること' do
         @user.birthday = nil
