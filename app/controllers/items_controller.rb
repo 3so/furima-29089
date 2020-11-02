@@ -2,8 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    #@items = Item.order(id: "DESC")
-    #「商品出品機能の実装」とは直接関係ないため、一時的にコメントアウトしています。
+    @items = Item.order(id: "DESC")
   end
 
   def new
