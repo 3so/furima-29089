@@ -29,7 +29,7 @@
 | shipping_charges_payer_id | integer    | null: false                    |
 | shipping_location_id      | integer    | null: false                    |
 | lead_time_id              | integer    | null: false                    |
-| price                     | integer    | null: false                    |
+| price                     | string     | null: false                    |
 | user                      | references | null: false, foreign_key: true |
 
 ### Association
