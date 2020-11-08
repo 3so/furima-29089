@@ -1,5 +1,8 @@
 class PurchasesController < ApplicationController
-  before_action :set_item, only: [:index, :create]
+  before_action :authenticate_user!
+  before_action :set_item
+  before_action :putting_up_user!
+  before_action :sold_out?
 
   def index
     @purchase_shipping_address = PurchaseShippingAddress.new
@@ -24,6 +27,18 @@ class PurchasesController < ApplicationController
 
   def purchase_shipping_address_params
     params.require(:purchase_shipping_address).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+  
+  def putting_up_user!
+    if current_user.id == @item.user.id
+      redirect_to root_path
+    end
+  end
+
+  def sold_out?
+    if @item.purchase != nil
+      redirect_to root_path
+    end
   end
 
   def pay_item
