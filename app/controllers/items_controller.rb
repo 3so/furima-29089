@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :putting_up_user?, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.order(id: 'DESC')
+    @items = Item.order(id: 'DESC').includes(:purchase)
   end
 
   def new
@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase = Purchase.find_by(item_id: @item.id)
   end
 
   def edit
