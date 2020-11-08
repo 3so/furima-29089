@@ -54,6 +54,10 @@ describe PurchaseShippingAddress do
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include("House number can't be blank")
       end
+      it '建物番号がなくても問題ないこと' do
+        @purchase_shipping_address.building_name = nil
+        expect(@purchase_shipping_address).to be_valid
+      end
       it '電話番号が必須であること' do
         @purchase_shipping_address.phone_number = nil
         @purchase_shipping_address.valid?
